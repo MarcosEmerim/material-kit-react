@@ -9,6 +9,7 @@ export const IndexPage = lazy(() => import('src/pages/app'));
 export const BlogPage = lazy(() => import('src/pages/blog'));
 export const UserPage = lazy(() => import('src/pages/user'));
 export const LoginPage = lazy(() => import('src/pages/login'));
+export const CadastroPage = lazy(() => import('src/pages/cadastro'));
 export const ProductsPage = lazy(() => import('src/pages/products'));
 export const Page404 = lazy(() => import('src/pages/page-not-found'));
 
@@ -29,16 +30,22 @@ export default function Router() {
       ) : (
         <Navigate to="/login" replace />
       ),
-      children: isAuthenticated ? [
-        { element: <IndexPage />, index: true },
-        { path: 'user', element: <UserPage /> },
-        { path: 'products', element: <ProductsPage /> },
-        { path: 'blog', element: <BlogPage /> },
-      ] : [],
+      children: isAuthenticated
+        ? [
+            { element: <IndexPage />, index: true },
+            { path: 'user', element: <UserPage /> },
+            { path: 'products', element: <ProductsPage /> },
+            { path: 'blog', element: <BlogPage /> },
+          ]
+        : [],
     },
     {
       path: 'login',
       element: <LoginPage />,
+    },
+    {
+      path: 'cadastro',
+      element: <CadastroPage />,
     },
     {
       path: '404',

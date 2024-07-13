@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import Box from '@mui/material/Box'; 
+import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
@@ -21,26 +21,42 @@ import Iconify from 'src/components/iconify';
 
 // ----------------------------------------------------------------------
 
-export default function LoginView() {
+export default function CadastroView() {
   const theme = useTheme();
   const router = useRouter();
-  const { login } = useAuth(); 
+  const { login } = useAuth();
 
   const [showPassword, setShowPassword] = useState(false);
 
   const handleClick = () => {
-    login(); 
+    login();
     router.push('/');
   };
 
   const renderForm = (
     <>
       <Stack spacing={3}>
+        <TextField name="name" label="Nome" />
+        <TextField name="lastname" label="Sobrenome" />
         <TextField name="email" label="Endereço de email" />
 
         <TextField
           name="password"
           label="Senha"
+          type={showPassword ? 'text' : 'password'}
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">
+                <IconButton onClick={() => setShowPassword(!showPassword)} edge="end">
+                  <Iconify icon={showPassword ? 'eva:eye-fill' : 'eva:eye-off-fill'} />
+                </IconButton>
+              </InputAdornment>
+            ),
+          }}
+        />
+        <TextField
+          name="confirm_password"
+          label="Confirme sua senha"
           type={showPassword ? 'text' : 'password'}
           InputProps={{
             endAdornment: (
@@ -63,7 +79,7 @@ export default function LoginView() {
           color="inherit"
           onClick={handleClick}
         >
-          Entrar
+          Criar conta
         </LoadingButton>
       </Stack>
     </>
@@ -79,7 +95,6 @@ export default function LoginView() {
         height: 1,
       }}
     >
-
       <Stack alignItems="center" justifyContent="center" sx={{ height: 1 }}>
         <Card
           sx={{
@@ -88,12 +103,12 @@ export default function LoginView() {
             maxWidth: 420,
           }}
         >
-          <Typography variant="h4">Entrar no VivaFloresta</Typography>
+          <Typography variant="h4">Cadastre-se no VivaFloresta</Typography>
 
           <Typography variant="body2" sx={{ mt: 2, mb: 5 }}>
-            Não tem uma conta?
-            <RouterLink to="/cadastro" variant="subtitle2" sx={{ ml: 0.5 }}>
-              Comece agora
+            Já tem uma conta?
+            <RouterLink to="/login" variant="subtitle2" sx={{ ml: 0.5 }}>
+              Faça seu login!
             </RouterLink>
           </Typography>
 
