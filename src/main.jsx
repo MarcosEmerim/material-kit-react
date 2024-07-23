@@ -1,5 +1,6 @@
 import { Suspense } from 'react';
 import ReactDOM from 'react-dom/client';
+import { SnackbarProvider } from 'notistack';
 import { BrowserRouter } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 
@@ -14,9 +15,11 @@ root.render(
   <HelmetProvider>
     <BrowserRouter>
       <AuthProvider>
-        <Suspense>
-          <App />
-        </Suspense>
+        <SnackbarProvider maxSnack={3}>
+          <Suspense>
+            <App />
+          </Suspense>
+        </SnackbarProvider>
       </AuthProvider>
     </BrowserRouter>
   </HelmetProvider>
